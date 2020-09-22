@@ -1,0 +1,26 @@
+{% extends "base_homepage.html" %}
+
+{% block header %}
+    <header class="jumbotron">
+        <div id="particles">
+        </div>
+        <div class="slider">
+            <h3>we love doing</h3>
+            <h1>web development</h1>
+            <h3>and</h3>
+            <h1>online marketing</h1>
+        </div>
+    </header>
+{% endblock %}
+
+
+{% block content %}
+    {% include 'components/techstack.html' %}
+<script>
+    var fullHeightJumbotron = true;
+</script>
+{% endblock %}
+
+{% block footer %}
+    {% include "components/contact.html" %}
+{% endblock %}
