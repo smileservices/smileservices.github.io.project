@@ -1,0 +1,25 @@
+{
+  "name": "smileservices_static",
+  "version": "1.0.0",
+  "description": "Using Pelican to render static pages and handle the blog",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "prod": "webpack --mode production",
+    "css": "node-sass --output-style compressed src/scss/ -o themes/clean-blog/static/css/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smileservices/smileservices.github.io.project.git"
+  },
+  "author": "vladimir gorea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smileservices/smileservices.github.io.project/issues"
+  },
+  "homepage": "https://github.com/smileservices/smileservices.github.io.project#readme",
+  "dependencies": {
+    "node-sass": "^5.0.0",
+    "webpack": "^5.36.2"
+  }
+}

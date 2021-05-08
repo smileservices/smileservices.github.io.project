@@ -1,0 +1,43 @@
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: $padding-lg;
+  align-items: center;
+  padding: $padding-lg 0;
+  font-weight: 700;
+
+  a, a:visited, a:active {
+    color: $color-black;
+  }
+
+  a:hover {
+    color: $color-1;
+  }
+
+  .small {
+    color: $color-gray
+  }
+
+  .right-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: $padding-lg
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  footer {
+    flex-direction: column;
+    flex-flow: column-reverse;
+
+    .left-side {
+      text-align: center
+    }
+
+    .right-side {
+      justify-content: space-between
+    }
+  }
+}

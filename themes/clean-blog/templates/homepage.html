@@ -1,27 +1,23 @@
 {% extends "base_homepage.html" %}
 
-{% block header %}
-    <header class="jumbotron">
-        <div id="particles">
-        </div>
-        <div class="slider">
-            <h3>we love building</h3>
-            <h1>Fast Web Apps</h1>
-            <h3>and</h3>
-            <h1>Automating Things</h1>
-        </div>
-    </header>
-{% endblock %}
-
-
+{% block header %}{% include 'components/homepage/homepage_header.html' %}{% endblock %}
 {% block content %}
-    {% include 'components/showcases.html' %}
-    {% include 'components/techstack.html' %}
-<script>
-    var fullHeightJumbotron = true;
-</script>
-{% endblock %}
-
-{% block footer %}
-    {% include "components/contact.html" %}
+{% include 'components/homepage/quality_custom_apps.html' %}
+{% include 'components/homepage/showcasing.html' %}
+{% include 'components/homepage/work_process.html' %}
+<section class="technologies">
+    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/python.png" alt="">
+    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/elastic.png" alt="">
+    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/react.png" alt="">
+    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/django.png" alt="">
+    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/digitalocean.png" alt="">
+    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/git.png" alt="">
+    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/ubuntu.png" alt="">
+    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/postgres.png" alt="">
+    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/ansible.png" alt="">
+    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/sentry.png" alt="">
+</section>
+<section class="cta">
+    {% include 'components/cta_button.html' %}
+</section>
 {% endblock %}

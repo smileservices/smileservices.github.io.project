@@ -1,0 +1,50 @@
+$fontsize-header-main: 3.25rem;
+$fontsize-header-sub: 2rem;
+$fontsize-section-head: 2.5rem;
+$fontsize-section-sub: 1.5rem;
+$fontsize-lg: 1.5rem;
+$fontsize-md: 1rem;
+$fontsize-sm: 0.75rem;
+
+$color-black: #1D1D1D;
+$color-white: #F8F8F8;
+$color-gray: #A1A1A1;
+$color-1: #FFA51E;
+$color-1-1: #FFF9EF;
+$color-2: #3347FF;
+$color-2-1: #F3F4FF;
+
+$padding-md: $fontsize-md;
+$padding-lg: $padding-md*2;
+$padding-sm: $padding-md/2;
+$padding-body-lateral: $padding-md*4;
+
+$navbar-height: $padding-lg*2+$fontsize-lg;
+$border-radius-sm: $fontsize-sm/2;
+$border-radius-md: $fontsize-md/2;
+$border-radius-lg: $fontsize-lg/2;
+
+@import "reset";
+
+body {
+  font-family: "Roboto Mono";
+  font-size: $fontsize-md;
+  line-height: $fontsize-lg;
+  background-color: $color-white;
+  color: $color-black;
+  padding: 0 $padding-body-lateral;
+  margin: 0 auto;
+  position: relative;
+  //max-width: 1200px;
+}
+
+@import "text";
+@import "layout";
+@import "content";
+@import "navbar";
+@import "header";
+@import "section";
+@import "homepage";
+@import "footer";
+@import "responsive";
+@import "animations";

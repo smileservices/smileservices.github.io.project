@@ -1,0 +1,17 @@
+.cta-button {
+  padding: $padding-sm $padding-md;
+  border-radius: $border-radius-sm;
+  background-color: $color-1;
+
+  a, a:visited, a:active {
+    color: $color-black;
+  }
+
+  &:hover {
+    color: $color-white;
+  }
+}
+
+.bg-blue-2 {
+  background-color: $color-2-1;
+}

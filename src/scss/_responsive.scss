@@ -1,0 +1,16 @@
+@media only screen and (max-width: 580px) {
+  body {
+    padding: 0 $padding-sm;
+
+    header {
+      margin: 0 (-$padding-sm);
+      margin-bottom: $padding-lg*1.5;
+      padding: $padding-lg $padding-sm;
+    }
+
+    section.bg {
+      margin-left: -$padding-sm;
+      margin-right: -$padding-sm;
+    }
+  }
+}
