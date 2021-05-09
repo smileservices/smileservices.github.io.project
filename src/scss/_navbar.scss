@@ -27,7 +27,8 @@ nav {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
-      gap: $padding-lg
+      gap: $padding-lg;
+      .nav-item {cursor: pointer}
     }
 
     .toggle-nav-menu {

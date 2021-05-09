@@ -1,0 +1,38 @@
+body.has-modal {
+  overflow: hidden;
+}
+
+.modal-container {
+  display: none;
+}
+
+.modal-container.open {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75);
+
+  .modal-content {
+    position: relative;
+    border-radius: $fontsize-sm/3;
+    padding: $padding-lg;
+    background-color: $color-white;
+    max-width: 550px;
+    margin: auto;
+    margin-top: $padding-lg*3;
+
+    span.close {
+      position: absolute;
+      top: $padding-md;
+      right: $padding-md;
+      cursor: pointer;
+      color: $color-gray;
+      &:hover {
+        color: $color-1;
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+<div class="modal-container" onclick="closeModal()">
+<div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close icon-close" onclick="closeModal()"></span>
+    {% block modal_content %}{% endblock %}
+</div>
+</div>

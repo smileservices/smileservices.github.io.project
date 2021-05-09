@@ -1,0 +1,16 @@
+{% extends "components/base_modal.html" %}
+
+{% block modal_content %}
+<div class="content" id="modal-project">
+    <div class="header">
+        <h3>What's Your Project Like?</h3>
+        <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+    </div>
+
+    <form action="https://formspree.io/mnqgorpj" method="POST">
+        <input type="email" name="_replyto" required placeholder="your email"/>
+        <textarea name="message" cols="30" rows="7" placeholder="your message" required></textarea>
+        <button>Send</button>
+    </form>
+</div>
+{% endblock %}

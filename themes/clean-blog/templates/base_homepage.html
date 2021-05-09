@@ -16,6 +16,7 @@
 
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500,700">
     <link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/main.css" rel="stylesheet">
+    <link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/icons/style.css" rel="stylesheet">
     {% block extra_css %}{% endblock %}
 
     {% if CSS_OVERRIDE %}
@@ -42,6 +43,19 @@
 {% block header %}{% endblock %}
 {% block content %}{% endblock %}
 {% include "components/footer.html" %}
+{% include "components/modal_whats_your_project.html" %}
+{% include "components/modal_contact.html" %}
+<script>
+    function openModal(id) {
+        document.getElementsByTagName('body')[0].classList.add('has-modal');
+        document.getElementById(id).parentNode.parentNode.classList.add('open');
+    }
+    function closeModal() {
+        document.getElementsByTagName('body')[0].classList.remove('has-modal');
+        Array.from(document.getElementsByClassName('modal-container open'))
+            .map(modal=>modal.classList.remove('open'));
+    }
+</script>
 </body>
 
 </html>

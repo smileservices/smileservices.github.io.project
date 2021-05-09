@@ -1,0 +1,29 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: $padding-lg;
+  margin-bottom: $padding-lg;
+
+  input, textarea {
+    border: 1px solid $color-gray;
+    border-radius: $fontsize-sm/4;
+    padding: $padding-sm $padding-md;
+    &:focus-visible {
+      border: 1px solid $color-2;
+    }
+  }
+
+  button {
+    padding: $padding-sm $padding-lg;
+    width: fit-content;
+    background-color: $color-1;
+    color: $color-white;
+    font-size: $fontsize-lg;
+    font-weight: 400;
+    border-radius: $fontsize-sm/3;
+    cursor: pointer;
+    &:hover {
+      background-color: darken($color-1, 15);
+    }
+  }
+}

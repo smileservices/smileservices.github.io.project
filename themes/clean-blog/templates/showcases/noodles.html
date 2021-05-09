@@ -1,0 +1,71 @@
+{% extends "base_homepage.html" %}
+
+{% block header %}
+{% include "components/homepage/homepage_header.html" %}
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <div class="header">
+        <h2>Showcasing Noodles.dev</h2>
+        <div class="subheading">
+            A community curated database of learning resources
+            that help developers to learn software development
+        </div>
+    </div>
+
+    <div class="technologies">
+        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/python.png" alt="">
+        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/elastic.png" alt="">
+        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/react.png" alt="">
+        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/django.png" alt="">
+        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/digitalocean.png" alt="">
+        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/git.png" alt="">
+        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/ubuntu.png" alt="">
+        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/postgres.png" alt="">
+        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/sentry.png" alt="">
+    </div>
+    <div class="panels">
+        <h2>To be written...</h2>
+    </div>
+    <div class="blocks">
+        <div class="block">
+            <div class="header image">
+                <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/speed.svg" alt="">
+            </div>
+            <h3>Fast & Nimble</h3>
+            <div class="subheading">
+                Working closely with the customer for understanding the end goal and for defining clear and measurable
+                requirements.
+            </div>
+        </div>
+        <div class="block">
+            <div class="header image">
+                <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/reliability.svg" alt="">
+            </div>
+            <h3>Scalable Infrastructure</h3>
+            <div class="subheading">
+                Transforming requirements into UI/UX designs, technical charts and making sure that we have everything
+                in order.
+            </div>
+        </div>
+        <div class="block">
+            <div class="header image">
+                <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/maintainability.svg" alt="">
+            </div>
+            <h3>Stable & Secure</h3>
+            <div class="subheading">
+                Writing modules, unit testing complex cases, setting up the servers, getting hands dirty.
+            </div>
+        </div>
+    </div>
+    <section class="cta">
+        {% include 'components/cta_button.html' %}
+    </section>
+</section>
+{% endblock %}
+
+{% block footer %}
+{% include "components/contact.html" %}
+{% endblock %}
