@@ -1,0 +1,195 @@
+<div class="accordion-container" id="noodles-accordion">
+    <div class="accordion-item open">
+        <div class="title">Support all screen sizes</div>
+        <div class="content">
+            <p>Although our target users mostly use big screen devices (at least 12 inches) we don't want to lose any
+                user.
+                Considering the cost/benefit we choose to <span class="highlight">support all screen sizes</span> and
+                implement a fluid design,
+                <span class="highlight">real-time adaptive</span> to viewport size changes.</p>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <div class="title">Blazing fast loading and processing times (less than 1 second)</div>
+        <div class="content">
+            <h4>Frontend</h4>
+            <p>We could have gone for Bootstrap but because we want the CSS bundle size to be as small as possible, we
+                opt for creating a CSS file specifically for noodles.dev. Minimized Bootstrap file is 19kB while our
+                custom
+                .css file is almost half the size.</p>
+
+            <p>For interactivity on frontend we opted to use <span class="highlight">ReactJS mini-apps</span>. This
+                allowed to load the main ReactJS
+                bundle only once while the individual mini-apps each have less than 30kB.</p>
+            <p>All static resources are served through a <span class="highlight">CDN service (Cloudflare)</span> thus
+                the initial resources loading
+                times
+                is considerably fast.</p>
+
+            <h4>Backend</h4>
+            <p>Whenever possible we are using Django inbuilt <span class="highlight">caching</span> with Redis backend
+                for serving content as fast as
+                possible.</p>
+
+            <p>Processing full-text and aggregation queries would be very slow on SQL Databases, especially when
+                searching through large amounts of data. PostgreSQL supports trigram indexing and is quite fast but is
+                still not
+                as powerful as <span class="highlight">Elasticsearch</span> which is built specifically for fastest full
+                text search. More on implementing
+                Elasticsearch with PostgreSQL on the full text search section.</p>
+
+            <div class="subsection">
+                <h4>Speed Measurements:</h4>
+                <ul class="styled">
+                    <li>Fulltext search in up to 0.5 million records in under 0.5s</li>
+                    <li>0.7s load time for homepage</li>
+                    <li>0.7s load time for searchpage</li>
+                    <li><span class="highlight">99/100 score on Google PageSpeed</span></li>
+                </ul>
+            </div>
+            <div class="subsection">
+                <h4>Bundle Sizes</h4>
+                <ul class="styled">
+                    <li><span class="highlight">1 .css file of 10.8 kB</span> in the top 10% of css bundle sizes < 14 kB
+                    </li>
+                    <li><span class="highlight">3 .js files totaling 72.1 kB</span> in the top 10% js bundle sizes < 108
+                        kB)
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <div class="title">Full text search through all content types</div>
+        <div class="content">
+            <p>Processing full-text and aggregation queries would be very slow on SQL Databases, especially when
+                searching through large amounts of data. PostgreSQL supports trigram indexing and is quite fast but is
+                still not
+                as powerful as Elasticsearch which is built specifically for fastest full text search.</p>
+
+            <p><span class="highlight">Elasticsearch</span> is a NoSQL database so data persistence is not as good as on
+                using an SQL database.
+                Noodles.dev uses a PostgreSQL instance for persisting all data but we want the searchable data to be
+                passed on to
+                the Elasticsearch instance running on AWS.</p>
+            <div class="subsection">
+                <h4>PostgreSQL and Elasticsearch synchronization</h4>
+                <p>Through the clever usage of hooks to the django data models each
+                    time a resource is created,updated or deleted a background task is queued to synchronizes it to the
+                    Elasticsearch index. For <span class="highlight">queue management</span> system we use the
+                    lightweight
+                    Huey python library.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <div class="title">Users can authenticate with facebook or google social accounts</div>
+        <div class="content">
+            <p>Allowing users to easily authenticate makes for a pleasant user experience, especially when they can do
+                so
+                with just 1 click. Using an authentication library using OAuth2 specifications is both secure and easy
+                to
+                implement.</p>
+            <div class="subsection">
+                <h4>Using allauth django package</h4>
+                <p>Noodles.dev uses allauth library for django. It supports a wide range of OAuth providers such as
+                    Facebook, Google, Github, Stackoverflow etc.</p>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <div class="title">Collaborative editing of resources</div>
+        <div class="content">
+            <p>Because the main selling point of Noodles.dev is the "community curated list of learning resources" we
+                needed a way for the registered users to edit any resource type.
+                For this purpose a modular <a href="https://django-edit-suggestion.readthedocs.io">django
+                    package</a> was created. It can easily make any django data model to
+                be transformed into a community editable resource.</p>
+            <div class="subsection">
+                <h4>Same mechanism as Wikipedia or StackOverflow</h4>
+                <p>Any registered user can create an edit suggestion for a resource. After the edit suggestion is
+                    created,
+                    it can be voted by the other registered users. <span class="highlight">The edit can be published or rejected if a condition is met.</span>
+                    In our project's case the condition is that the user should be either the resource owner, an user
+                    with a
+                    high positive score or a staff member.</p>
+
+                <p>If the edit is published, the edit owner receives a positive reward. More on that in the next
+                    section.</p>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <div class="title">Reward system for contributing users</div>
+        <div class="content">
+            <p>You can't have community creating or editing content without rewarding such behaviours somehow.
+                Noodles.dev
+                has a points/rewards system where each user has a positive and a negative score reflecting their
+                actions.</p>
+            <div class="subsection">
+                <h4>Different type of actions give different rewards:</h4>
+                <ul class="styled">
+                    <li>Creating a resource is the most rewarding</li>
+                    <li>Getting an edit suggestion published</li>
+                    <li>Owned resource gets voted up or reviewed</li>
+                    <li>Review gets voted up</li>
+                </ul>
+            </div>
+            <div class="subsection">
+                <h4>Proofing the rewards system</h4>
+                <ul class="styled">
+                    <li>Voting on a resource, review or an edit suggestion can only be done once per user</li>
+                    <li>An user can only review a learning resource once</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <div class="title">Minimum running costs</div>
+        <div class="content">
+            <p>We don't like waste resources but also hope that Noodles.dev will get millions of users. Until we become
+                the
+                next social network of developers unicorn app, we want to pay as little as possible while delivering the
+                best
+                experience.</p>
+
+            <div class="subsection">
+                <h4>Current capabilities for 16 USD/month:</h4>
+                <ul class="styled">
+                    <li>Up to 25 000 users/day</li>
+                    <li>Search through up to 1.2 milion records in under 0.5s</li>
+                    <li>0.7s load time for homepage</li>
+                    <li>0.7s load time for searchpage</li>
+                    <li>99/100 score on Google PageSpeed</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <div class="title">Easily scaling up if neccessary</div>
+        <div class="content">
+            <p> While i'm sure that the current capabilities are enough for a long time from now, when we'll be
+                approaching the limits of the current set up the first steps towards scaling up will be:</p>
+            <ul class="styled">
+                <li>Move to a server with more Cores/RAM</li>
+                <li>Move PostgreSQL to a separate server</li>
+                <li>Analyze the load on each subsystem and scale accordingly using a load balancer</li>
+                <li>Containerize each subsystem (main app, queuing management) and use a container orchestration like
+                    Docker-Swarm or Kubernetes to dynamically manage the traffic requirements
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+        Array.from(document.getElementById('noodles-accordion').children)
+            .map(child =>child.getElementsByClassName('title')[0]
+                .addEventListener('click', e => {
+                    Array.from(document.getElementById('noodles-accordion').children).map(el=>el.classList.remove('open'));
+                    e.target.parentNode.classList.toggle('open');
+                })
+            )
+    });
+</script>

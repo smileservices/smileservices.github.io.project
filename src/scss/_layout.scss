@@ -12,3 +12,15 @@
     color: $color-gray;
   }
 }
+
+.subsection {
+  margin-bottom: $padding-md;
+}
+
+ul.styled > li {
+  margin-left: $padding-lg;
+  padding-left: $padding-md;
+  &::marker {
+    content: ">>";
+  }
+}

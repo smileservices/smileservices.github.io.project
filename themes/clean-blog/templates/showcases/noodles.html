@@ -8,13 +8,12 @@
 {% block content %}
 <section>
     <div class="header">
-        <h2>Showcasing Noodles.dev</h2>
+        <h2>Showcasing <a href="https://noodles.dev/">Noodles.dev</a></h2>
         <div class="subheading">
             A community curated database of learning resources
             that help developers to learn software development
         </div>
     </div>
-
     <div class="technologies">
         <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/python.png" alt="">
         <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/elastic.png" alt="">
@@ -26,9 +25,7 @@
         <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/postgres.png" alt="">
         <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/sentry.png" alt="">
     </div>
-    <div class="panels">
-        <h2>To be written...</h2>
-    </div>
+    {% include "showcases/noodles_accordion.html" %}
     <div class="blocks">
         <div class="block">
             <div class="header image">

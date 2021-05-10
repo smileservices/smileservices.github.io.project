@@ -19,3 +19,19 @@ h3 {
 a {
   cursor: pointer;
 }
+
+p {
+  display: block;
+  margin-bottom: $padding-md;
+}
+
+h4 {
+  font-size: $fontsize-md;
+  font-weight: 600;
+  margin: $padding-sm 0;
+}
+span.highlight {
+  padding: $padding-sm/2;
+  color: $color-2;
+  background-color: $color-2-1;
+}

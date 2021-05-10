@@ -1,11 +1,14 @@
 @keyframes growDown {
     0% {
-        transform: scaleY(0)
+        transform: scaleY(0);
+        transform-origin: top center;
     }
     80% {
-        transform: scaleY(1.1)
+        transform: scaleY(1.1);
+        transform-origin: top center;
     }
     100% {
-        transform: scaleY(1)
+        transform: scaleY(1);
+        transform-origin: top center;
     }
 }
