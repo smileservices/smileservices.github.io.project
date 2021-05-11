@@ -5,12 +5,22 @@ body.has-modal {
 .modal-container {
   display: none;
   font-size: $fontsize-sm;
+
   .company-info {
     color: $color-gray;
-    h4 { margin: 0; text-align: left}
+
+    h4 {
+      margin: 0;
+      text-align: left
+    }
+
     .subheading {
       text-align: left;
-      p {margin: 0; line-height: $fontsize-md}
+
+      p {
+        margin: 0;
+        line-height: $fontsize-md
+      }
     }
   }
 }
@@ -29,7 +39,7 @@ body.has-modal {
     border-radius: $fontsize-sm/3;
     padding: $padding-lg;
     background-color: $color-white;
-    max-width: 550px;
+    max-width: 440px;
     margin: auto;
     margin-top: $padding-lg*3;
 
@@ -39,6 +49,7 @@ body.has-modal {
       right: $padding-md;
       cursor: pointer;
       color: $color-gray;
+
       &:hover {
         color: $color-1;
       }
@@ -46,3 +57,9 @@ body.has-modal {
   }
 }
 
+@media only screen and (max-width: 550px) {
+  .modal-container.open .modal-content {
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+}
