@@ -12,5 +12,11 @@
       margin-left: -$padding-sm;
       margin-right: -$padding-sm;
     }
+    footer {
+      .right-side {
+        flex-direction: column;
+        gap: $padding-sm;
+      }
+    }
   }
 }
