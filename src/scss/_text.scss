@@ -35,3 +35,16 @@ span.highlight {
   color: $color-2;
   background-color: $color-2-1;
 }
+
+ol {
+  list-style: decimal;
+  margin-left: $padding-lg;
+  margin-bottom: $padding-md;
+  li {
+    margin-left: $padding-sm;
+  }
+}
+
+strong {
+  font-weight: 600;
+}

@@ -1,68 +1,32 @@
 {% extends "base_homepage.html" %}
 
-{% block extra_css %}
-<link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/clean-blog.css" rel="stylesheet">
-<link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/code_blocks/darkly.css" rel="stylesheet">
-{% endblock %}
-
-
-{% block header %}
-<header class="jumbotron">
-    <div id="particles">
-    </div>
-    <div class="slider">
-        <h1>the blog</h1>
-    </div>
-</header>
-{% endblock %}
+{% block header %}{% include "components/blog/header.html" %}{% endblock %}
 
 {% block content %}
-
-{% if INTRO_CONTENT %}
-<section class="intro-content">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            {{ INTRO_CONTENT }}
-        </div>
-    </div>
-</section>
-{% endif %}
-
 <section class="articles">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-12 ">
-                {% for article in articles_page.object_list %}
-                <div class="post-preview">
-                    <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
-                       title="Permalink to {{ article.title|striptags }}">
-                        <h2 class="post-title">
-                            {{ article.title }}
-                        </h2>
-                    </a>
-                    {% if SHOW_FULL_ARTICLE %}
-                    {{ article.content }}
-                    {% else %}
-                    <p class="article-summary">
-                        {% if article.has_summary %}
-                        {{ article.summary }}
-                        {% elif article.summary %}
-                        {{ article.summary|striptags|truncate(140) }}
-                        {% endif %}
-                    </p>
-                    {% endif %}
-                    <p class="post-meta">Posted on {{ article.locale_date }}
-                    </p>
-                </div>
-                <hr>
-                {% endfor %}
-            </div>
-        </div>
+    {% for article in articles_page.object_list %}
+    <div class="post-preview">
+        <a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark"
+           title="Permalink to {{ article.title|striptags }}">
+            <h2 class="post-title">
+                {{ article.title }}
+            </h2>
+        </a>
+        {% if SHOW_FULL_ARTICLE %}
+        {{ article.content }}
+        {% else %}
+        <p class="article-summary">
+            {% if article.has_summary %}
+            {{ article.summary }}
+            {% elif article.summary %}
+            {{ article.summary|striptags|truncate(140) }}
+            {% endif %}
+        </p>
+        {% endif %}
+        <p class="post-meta">Posted on {{ article.locale_date }}</p>
     </div>
+    {% endfor %}
 </section>
 
 {% include "pagination.html" %}
-<script>
-    var fullHeightJumbotron = false;
-</script>
 {% endblock content %}

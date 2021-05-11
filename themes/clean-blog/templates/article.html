@@ -1,10 +1,7 @@
 {% extends "base_homepage.html" %}
-
 {% block extra_css %}
-<link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/clean-blog.css" rel="stylesheet">
 <link href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/code_blocks/darkly.css" rel="stylesheet">
 {% endblock %}
-
 {% block title %}{{ article.title|striptags }}{% endblock %}
 
 {% block head %}
@@ -92,66 +89,32 @@
 {% endif %}
 {% endblock %}
 
-{% block header %}
-<!-- Page Header -->
-{% if article.header_cover %}
-<header class="jumbotron" style="background-image: url('{{ SITEURL }}/{{ article.header_cover }}')">
-    {% elif HEADER_COVER %}
-    <header class="jumbotron" style="background-image: url('{{ SITEURL }}/{{ HEADER_COVER }}')">
-        {% elif HEADER_COLOR %}
-        <header class="jumbotron" style="background-color: {{ HEADER_COLOR }}">
-            {% else %}
-            <header class="jumbotron"
-                    style="background-image: url('{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/post-bg.jpg')">
-                {% endif %}
-                <div id="particles">
-                </div>
-                <div class="slider">
-                    <h1>{{ article.title|striptags }}</h1>
-                    {% if article.headline %}
-                    <h3 class="subheading">{{ article.headline }}</h3>
-                    {% endif %}
-                    <span class="meta">Posted by
-                {% for author in article.authors %}
-                    <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
-                {% endfor %}
-                 on {{ article.locale_date }}
-        </span>
-                    {% if article.modified %}
-                    <span class="meta">Updated on {{ article.locale_modified }}</span>
-                    {% endif %}
-                    {% import 'translations.html' as translations with context %}
-                    {{ translations.translations_for(article) }}
-                </div>
-            </header>
-            {% endblock header %}
+{% block header %}{% include "components/blog/header.html" %}{% endblock %}
+{% block content %}
 
-            {% block content %}
-            <!-- Post Content -->
-            <section class="article">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 col-lg-offset-2 col-md-12">
-                            {{ article.content }}
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- Post Content -->
+<section class="article">
+    <div class="header">
+        <h2>{{ article.title|striptags }}</h2>
+        <div class="subheading">
+            {{ article.heading|striptags }}
+        </div>
+        <div class="smalltext">
+            <span class="meta">Posted by
+            {% for author in article.authors %}
+                <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
+            {% endfor %}
+             on {{ article.locale_date }}</span>
+            {% if article.modified %}<span class="meta">Updated on {{ article.locale_modified }}</span>{% endif %}
+        </div>
+    </div>
+    {{ article.content }}
+    {% if article.tags %}
+    <div class="tags">
+        {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag | escape }}</a>{% endfor %}
+    </div>
+    {% endif %}
+</section>
 
-            {% if article.tags %}
-            <section class="article">
-                <div class="container">
-                    <div class="tags">
-                        <p>tags: {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag | escape
-                            }}</a>{% if
-                            not loop.last %}, {% endif %}{% endfor %}</p>
-                    </div>
-                </div>
-            </section>
-            {% endif %}
-
-            {% include 'sharing.html' %}
-            <script>
-                var fullHeightJumbotron = false;
-            </script>
-            {% endblock content %}
+{% include 'sharing.html' %}
+{% endblock content %}
