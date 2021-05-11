@@ -34,3 +34,9 @@ section.article {
     margin-bottom: 0;
   }
 }
+
+@media only screen and (max-width: 580px) {
+  section.article {
+    margin: $padding-lg 0;
+  }
+}

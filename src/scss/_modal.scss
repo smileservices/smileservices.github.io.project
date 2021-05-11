@@ -4,6 +4,15 @@ body.has-modal {
 
 .modal-container {
   display: none;
+  font-size: $fontsize-sm;
+  .company-info {
+    color: $color-gray;
+    h4 { margin: 0; text-align: left}
+    .subheading {
+      text-align: left;
+      p {margin: 0; line-height: $fontsize-md}
+    }
+  }
 }
 
 .modal-container.open {
@@ -36,3 +45,4 @@ body.has-modal {
     }
   }
 }
+

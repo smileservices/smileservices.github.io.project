@@ -1,8 +1,8 @@
-$fontsize-header-main: 3.25rem;
-$fontsize-header-sub: 2rem;
-$fontsize-section-head: 2.5rem;
-$fontsize-section-sub: 1.5rem;
-$fontsize-lg: 1.5rem;
+$fontsize-header-main: 2.25rem;
+$fontsize-header-sub: 1.5rem;
+$fontsize-section-head: 1.5rem;
+$fontsize-section-sub: 1.15rem;
+$fontsize-lg: 1.25rem;
 $fontsize-md: 1rem;
 $fontsize-sm: 0.75rem;
 
@@ -18,7 +18,7 @@ $color-2-1: #F3F4FF;
 $padding-md: $fontsize-md;
 $padding-lg: $padding-md*2;
 $padding-sm: $padding-md/2;
-$padding-body-lateral: $padding-md*4;
+$padding-body-lateral: $padding-md*2;
 
 $navbar-height: $padding-lg*2+$fontsize-lg;
 $border-radius-sm: $fontsize-sm/2;
