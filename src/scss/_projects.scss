@@ -1,0 +1,35 @@
+#projects{
+  background-color: $color-1-1;
+  .bg-purple{
+    padding: 3rem 2rem 0 2rem;
+    margin-bottom: 0;
+    .wrapper{
+      max-width: 43.75rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      gap: 2rem;
+      .project{
+        margin-top: -4.063rem;
+        b{
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 576px){
+  #projects{
+    .bg-purple{
+      .wrapper{
+        flex-direction: column;
+        margin-bottom: 4rem;
+        h2{
+          padding-left: 3.125rem;
+          padding-right: 1.875rem;
+        }
+      }
+    }
+  }
+}

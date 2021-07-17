@@ -3,21 +3,28 @@
 {% block header %}{% include 'components/homepage/homepage_header.html' %}{% endblock %}
 {% block content %}
 {% include 'components/homepage/quality_custom_apps.html' %}
+{% include 'components/homepage/projects_section.html'%}
 {% include 'components/homepage/showcasing.html' %}
 {% include 'components/homepage/work_process.html' %}
-<section class="technologies">
-    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/python.png" alt="">
-    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/elastic.png" alt="">
-    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/react.png" alt="">
-    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/django.png" alt="">
-    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/digitalocean.png" alt="">
-    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/git.png" alt="">
-    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/ubuntu.png" alt="">
-    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/postgres.png" alt="">
-    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/ansible.png" alt="">
-    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/sentry.png" alt="">
-</section>
-<section class="cta">
-    {% include 'components/cta_button.html' %}
-</section>
+<div id="projects">
+    <section class="bg bg-projects">
+        <div class="wrapper-cta">
+            <div class="header header-cta">
+                <a class="logo" href="/">
+                    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/logo_cta.png" alt="">
+                </a>
+                <h2>What’s your Project About?</h2>
+                <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+                {% include 'components/cta_button.html' %}
+            </div>
+            <div class="project">
+                <div class="image">
+                    <a>
+                        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/abstract_cta.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 {% endblock %}

@@ -5,6 +5,9 @@ nav {
   align-items: center;
   padding: $padding-lg 0;
   font-weight: 700;
+  width: 86%;
+  margin-left: auto;
+  margin-right: auto;
 
   a, a:visited, a:active {
     color: $color-black;
@@ -27,7 +30,7 @@ nav {
       display: flex;
       flex-direction: row;
       justify-content: flex-end;
-      gap: $padding-lg;
+      gap: 3rem;
       .nav-item {cursor: pointer}
     }
 

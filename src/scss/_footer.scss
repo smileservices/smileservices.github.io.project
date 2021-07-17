@@ -4,8 +4,11 @@ footer {
   justify-content: space-between;
   gap: $padding-lg;
   align-items: center;
-  padding: $padding-lg 0;
+  padding: 2.3rem 0;
   font-weight: 700;
+  width: 88%;
+  margin-left: auto;
+  margin-right: auto;
 
   a, a:visited, a:active {
     color: $color-black;
@@ -16,28 +19,49 @@ footer {
   }
 
   .small {
-    color: $color-gray
+    color: $color-gray;
+    margin-top: 0.938rem;
+    font-size: $fontsize-md;
   }
-
+  .left-side{
+    .logo{
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: $fontsize-section-head;
+    }
+  }
   .right-side {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    gap: $padding-lg
+    gap: $padding-lg;
+    font-size: $fontsize-lg;
+  }
+  a{
+    margin-right: 1.875rem;
   }
 }
 
 @media only screen and (max-width: 800px) {
   footer {
+    align-items: flex-start;
     flex-direction: column;
-    flex-flow: column-reverse;
 
     .left-side {
-      text-align: center
+      text-align: left;
     }
 
     .right-side {
-      justify-content: space-between
+      justify-content: space-between;
+      display: contents;
+    }
+  }
+}
+@media only screen and (max-width: 576px){
+  footer{
+    a{
+      font-size: 1.125rem;
     }
   }
 }

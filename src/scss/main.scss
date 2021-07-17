@@ -1,20 +1,24 @@
-$fontsize-header-main: 2.25rem;
-$fontsize-header-sub: 1.5rem;
+$fontsize-header-main: 4.1875rem;
+$fontsize-header-sub: 2rem;
+$fontsize-header-after: 1.75rem;
 $fontsize-section-head: 1.5rem;
-$fontsize-section-sub: 1.15rem;
+$fontsize-section-sub: 1.5rem;
 $fontsize-lg: 1.25rem;
 $fontsize-md: 1rem;
 $fontsize-sm: 0.75rem;
 
 $color-black: #1D1D1D;
+$color-black-intense: #000000;
 $color-white: #F8F8F8;
 $color-gray: #5e5d5d;
 $color-gray-2: #6d6c6c;
+$color-gray-3: #4C4C4E;
+$color-blue-1: #7b00ff;
 $color-1: #FFA51E;
 $color-1-1: #FFF9EF;
 $color-2: #3347FF;
-$color-2-1: #F3F4FF;
-
+$color-2-1: #F8F8FF;
+$background-color-white: #ffffff;
 $padding-md: $fontsize-md;
 $padding-lg: $padding-md*2;
 $padding-sm: $padding-md/2;
@@ -26,12 +30,11 @@ $border-radius-md: $fontsize-md/2;
 $border-radius-lg: $fontsize-lg/2;
 
 @import "reset";
-
 body {
-  font-family: "Roboto Mono";
+  font-family: 'Roboto', sans-serif;
   font-size: $fontsize-md;
   line-height: $fontsize-lg;
-  background-color: $color-white;
+  background-color: $color-1-1;
   color: $color-black;
   padding: 0 $padding-body-lateral;
   margin: 0 auto;
@@ -53,3 +56,5 @@ body {
 @import "footer";
 @import "responsive";
 @import "animations";
+@import "process";
+@import "projects";

@@ -5,11 +5,11 @@ form {
   margin-bottom: $padding-lg;
 
   input, textarea {
-    border: 1px solid $color-gray;
+    border: 0.063rem solid $color-gray;
     border-radius: $fontsize-sm/4;
     padding: $padding-sm $padding-md;
     &:focus-visible {
-      border: 1px solid $color-2;
+      border: 0.063rem solid $color-2;
     }
   }
 

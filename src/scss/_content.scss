@@ -1,8 +1,51 @@
+.wrapper{
+  .header{
+    max-width: 49.2rem;
+    align-items: flex-start;
+    line-height: 4.908rem;
+    h2{
+      font-size: 4.188rem;
+    }
+    h3{
+      font-size: 4.188rem;
+      a{
+        color: $color-blue-1;
+      }
+    }
+    .subheading{
+      font-size: $fontsize-section-head;
+      line-height: 1.758rem;
+      text-align: left;
+      color: $color-black-intense;
+      font-weight: 400;
+      margin-top: 2.25rem;
+    }
+    .link-container{
+      margin-top: 3.75rem;
+      a{
+        border: 0.125rem solid #000000;
+        padding: 0.938rem 2.313rem;
+        color: $color-black-intense;
+        font-size: $fontsize-lg;
+        font-weight: 500;
+      }
+    }
+  }
+}
+.description{
+  .technologies{
+    img{
+      margin-right: 2.313rem;
+      height: 2.375rem;
+    }
+  }
+}
 .cta-button {
-  padding: $padding-sm $padding-md;
   border-radius: $border-radius-sm;
   background-color: $color-1;
   cursor: pointer;
+  padding: 1.125rem 1.188rem;
+  font-size: $fontsize-lg;
 
   a, a:visited, a:active {
     color: $color-black;
@@ -15,13 +58,20 @@
 
 .bg-blue-2 {
   background-color: $color-2-1;
+ .wrapper{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   align-items: center;
+   gap: 2rem;
+ }
 }
 
 code {
   background-color: #e3e7df;
   color: #343642;
   padding: $padding-sm/3 $padding-md/2;
-  border-radius: 3px;
+  border-radius: 0.188rem;
 }
 
 .tags {
@@ -34,7 +84,7 @@ code {
     background-color: #e3e7df;
     color: $color-2;
     padding: $padding-sm/3 $padding-md/2;
-    border-radius: 3px;
+    border-radius: 0.188rem;
     white-space: nowrap;
 
     &:hover {
@@ -45,5 +95,45 @@ code {
       content: '#';
       margin-right: $padding-sm;
     }
+  }
+}
+@media only screen and (max-width: 767px){
+  .bg.bg-blue-2{
+    padding: 3rem 4rem;
+    .wrapper{
+      flex-direction: column;
+    }
+  }
+}
+@media only screen and (max-width: 576px){
+  .bg.bg-blue-2{
+    padding: 3rem 5rem;
+    .wrapper{
+      .header{
+        h2{
+          font-size: $fontsize-header-sub;
+          line-height: 0;
+        }
+        h3{
+          font-size: $fontsize-header-sub;
+        }
+        .subheading{
+          font-size: $fontsize-md;
+        }
+        .link-container{
+          width: 100%;
+          a{
+            font-size: 1.125rem;
+            width: 100%;
+            display: block;
+            line-height: 3.375;
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+  .cta-button{
+    font-size: 1.125rem;
   }
 }
