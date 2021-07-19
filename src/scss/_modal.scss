@@ -1,7 +1,102 @@
 body.has-modal {
   overflow: hidden;
 }
-
+#modal-project{
+  .header{
+    margin-bottom: 1rem;
+    align-items: flex-start;
+    margin-top: $fontsize-md;
+    h3{
+      color: $color-black-intense;
+      font-size: 1.5rem;
+      margin-bottom: 2.375rem;
+      font-weight: 700;
+    }
+    .subheading{
+      font-size: 1.125rem;
+      font-weight: 400;
+      text-align: left;
+    }
+  }
+  form{
+    margin-bottom: 1rem;
+    input{
+      font-size: 0.625rem;
+      padding: 1.1rem 1.2rem;
+    }
+    textarea{
+      padding: 1.1rem 1.2rem;
+    }
+    input::placeholder{
+      color: $color-black-intense;
+    }
+    textarea::placeholder{
+      color: $color-black-intense;
+    }
+    button{
+      color: $color-black-intense;;
+      width: 100%;
+      font-weight: 700;
+      font-size: 1.125rem;
+      padding: 0.75rem 0;
+    }
+  }
+}
+#modal-contact{
+  .header{
+    margin-bottom: 1rem;
+    align-items: flex-start;
+    margin-top: $fontsize-md;
+    h3{
+      color: $color-black-intense;
+      font-size: 1.5rem;
+      margin-bottom: 2.375rem;
+      font-weight: 700;
+    }
+    .subheading{
+      font-size: 1.125rem;
+      font-weight: 400;
+      text-align: left;
+    }
+  }
+  form{
+    margin-bottom: 1rem;
+    input{
+      font-size: 0.625rem;
+      padding: 1.1rem 1.2rem;
+    }
+    textarea{
+      padding: 1.1rem 1.2rem;
+    }
+    input::placeholder{
+      color: $color-black-intense;
+    }
+    textarea::placeholder{
+      color: $color-black-intense;
+    }
+    button{
+      color: $color-black-intense;;
+      width: 100%;
+      font-weight: 700;
+      font-size: 1.125rem;
+      padding: 0.75rem 0;
+    }
+  }
+  .company-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    h4{
+      color: $color-gray-3;
+      font-size: 0.75rem;
+    }
+    p{
+      margin-bottom: 0;
+      margin-top: 0.188rem;
+    }
+  }
+}
 .modal-container {
   display: none;
   font-size: $fontsize-sm;
@@ -37,7 +132,7 @@ body.has-modal {
   .modal-content {
     position: relative;
     border-radius: $fontsize-sm/3;
-    padding: $padding-lg;
+    padding: 1.5rem 2rem;
     background-color: $color-white;
     max-width: 27.5rem;
     margin: auto;
@@ -48,7 +143,11 @@ body.has-modal {
       top: $padding-md;
       right: $padding-md;
       cursor: pointer;
-      color: $color-gray;
+      color: $color-black-intense;
+      font-weight: 800;
+      font-size: 0.75rem;
+      margin-top: 1.063rem;
+      margin-right: 1.25rem;
 
       &:hover {
         color: $color-1;

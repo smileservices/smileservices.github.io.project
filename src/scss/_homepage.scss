@@ -19,7 +19,7 @@ section {
         text-align: left;
 
         .subheading {
-          color: $color-gray;
+          color: $color-gray-3;
           font-size: $fontsize-md;
         }
       }
@@ -72,7 +72,7 @@ section.technologies {
 #cta {
   section {
     margin-bottom: 0;
-    padding: 3rem 0;
+    padding-bottom: 0;
     .bg-cta {
       padding: 3rem 2rem 0 2rem;
       background-color: $color-1-1;
@@ -90,6 +90,7 @@ section.technologies {
         .subheading {
           margin-bottom: 3.75rem;
           text-align: left;
+          color: $color-black-intense;
         }
       }
       h2 {

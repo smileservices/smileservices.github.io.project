@@ -4,14 +4,14 @@ footer {
   justify-content: space-between;
   gap: $padding-lg;
   align-items: center;
-  padding: 2.3rem 0;
+  padding: 1.5rem 0;
   font-weight: 700;
   width: 88%;
   margin-left: auto;
   margin-right: auto;
 
   a, a:visited, a:active {
-    color: $color-black;
+    color: $color-black-intense;
   }
 
   a:hover {
@@ -19,9 +19,10 @@ footer {
   }
 
   .small {
-    color: $color-gray;
+    color: $color-gray-3;
     margin-top: 0.938rem;
     font-size: $fontsize-md;
+    font-weight: 400;
   }
   .left-side{
     .logo{
@@ -29,6 +30,7 @@ footer {
       align-items: center;
       gap: .75rem;
       font-size: $fontsize-section-head;
+      font-weight: 400;
     }
   }
   .right-side {
@@ -40,9 +42,16 @@ footer {
   }
   a{
     margin-right: 1.875rem;
+    font-weight: 500;
   }
 }
-
+@media only screen and (max-width: 1100px){
+  footer {
+    a {
+      margin-right: 0;
+    }
+  }
+}
 @media only screen and (max-width: 800px) {
   footer {
     align-items: flex-start;
