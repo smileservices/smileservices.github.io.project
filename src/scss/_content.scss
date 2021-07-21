@@ -105,6 +105,28 @@ code {
     }
   }
 }
+@media only screen and (max-width: 1200px){
+  .description{
+    .technologies{
+      img{
+        margin-right: 0;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 991px){
+  .description{
+    .technologies{
+      img{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        gap: 2rem;
+      }
+    }
+  }
+}
 @media only screen and (max-width: 576px){
   .bg.bg-blue-2{
     padding: 3rem 5rem;
