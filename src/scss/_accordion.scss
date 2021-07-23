@@ -1,3 +1,16 @@
+#section-accordion{
+  margin-bottom: 0;
+  background: #fff;
+  margin-left: -31px;
+  margin-right: -31px;
+  margin-top: -64px;
+  .accordion-title{
+    font-weight: 700;
+    font-size: 56px;
+    margin-top: 100px;
+    margin-bottom: 43px;
+  }
+}
 .accordion-container {
   display: flex;
   flex-direction: column;
@@ -10,11 +23,13 @@
     flex-direction: column;
 
     .title {
-      padding: $padding-md;
+      padding: 26px;
       background-color: $color-2-1;
-      font-size: $fontsize-md;
+      font-size: 24px;
       font-weight: 400;
       cursor: pointer;
+      border-top: 2px solid #D9D9F5;
+      border-bottom: 2px solid #D9D9F5;
 
       &:hover {
         background-color: $color-1-1;
@@ -28,26 +43,85 @@
 
     &.open {
       .title {
-        background-color: $color-1-1;
-        color: $color-2;
+        background-color: #f8f8ff;
+        padding: 26px;
+        font-size: 24px;
+        font-weight: 400;
+        border-bottom: 2px solid #D9D9F5;
       }
-
       .content {
         display: block;
-        padding: $padding-md;
-        border-top: 1px solid $color-2;
-        background-color: $color-1-1;
+        padding: 4rem 2rem 1rem 2rem;
+        background-color: #ffffff;
         color: $color-gray-2;
         animation: growDown 300ms ease-in-out forwards;
-
         h4 {
           padding: $padding-sm/2 $padding-sm;
-          color: $color-white;
           border-radius: $fontsize-sm/3;
           display: inline-block;
-          background-color: lighten($color-gray, 15);
+          color: #4253F5;
+          background-color: #CBD0FF;
+          margin-bottom: 20px;
+        }
+        p{
+          font-size: 24px;
+          line-height: 37px;
+          color: #2C2C31;
         }
       }
     }
+  }
+}
+@media only screen and (max-width: 1600px){
+  .accordion-container{
+    max-width: 70.125rem;
+  }
+}
+@media only screen and (max-width: 1150px){
+  .accordion-container{
+    max-width: 50rem;
+  }
+}
+@media only screen and (max-width: 800px){
+  .accordion-container{
+    max-width: 40rem;
+  }
+}
+@media only screen and (max-width: 576px){
+  #section-accordion{
+    .accordion-title{
+      font-size: 32px;
+      margin-top: 60px;
+      margin-bottom: 26px;
+    }
+  }
+  .accordion-container{
+    gap: 0;
+    max-width: 22rem;
+    .accordion-item{
+      .title{
+        border-bottom: none;
+        font-size: 16px;
+      }
+    }
+    .accordion-item:last-child{
+      border-bottom: 2px solid #D9D9F5;
+    }
+    .accordion-item.open{
+      .title{
+        font-size: 16px;
+      }
+      .content{
+        padding: 2rem 1rem 1rem 1rem;
+        p{
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 400px){
+  .accordion-container{
+    max-width: 19rem;
   }
 }

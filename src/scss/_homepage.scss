@@ -70,11 +70,10 @@ section.technologies {
 //}
 
 #cta {
-  section {
-    margin-bottom: 0;
-    padding-bottom: 0;
+  section.bg-cta {
+    padding: 3rem 0;
     .bg-cta {
-      padding: 3rem 2rem 0 2rem;
+      padding: 3rem 0;
       background-color: $color-1-1;
     }
     .wrapper-cta {
@@ -84,7 +83,7 @@ section.technologies {
       justify-content: space-between;
       align-items: center;
       .header {
-        margin-left: 8.75rem;
+        margin-left: 6.40rem;
         align-items: flex-start;
         max-width: 51.2rem;
         .subheading {

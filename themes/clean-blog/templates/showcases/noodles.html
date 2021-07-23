@@ -1,66 +1,72 @@
 {% extends "base_homepage.html" %}
-
-{% block header %}
-{% include "components/homepage/homepage_header.html" %}
-{% endblock %}
-
-
 {% block content %}
-<section>
-    <div class="header">
-        <h2>Showcasing <a href="https://noodles.dev/">Noodles.dev</a></h2>
-        <div class="subheading">
-            A community curated database of learning resources
-            that help developers to learn software development
+{% include 'components/homepage/showcasing.html' %}
+{% include "showcases/noodles_accordion.html" %}
+    <section class="intro intro-showcase">
+        <div class="header header-left-align">
+            <h2>Why work with us?</h2>
         </div>
-    </div>
-    <div class="technologies">
-        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/python.png" alt="">
-        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/elastic.png" alt="">
-        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/react.png" alt="">
-        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/django.png" alt="">
-        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/digitalocean.png" alt="">
-        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/git.png" alt="">
-        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/ubuntu.png" alt="">
-        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/postgres.png" alt="">
-        <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/technologies/sentry.png" alt="">
-    </div>
-    {% include "showcases/noodles_accordion.html" %}
-    <div class="blocks">
-        <div class="block">
-            <div class="header image">
-                <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/speed.svg" alt="">
+        <div class="blocks">
+            <div class="block">
+                <div class="rounded-bg"></div>
+                <div class="header image">
+                    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/speed.svg" alt="">
+                </div>
+                <h3>Fast & Nimble</h3>
+                <div class="subheading">
+                    Working closely with the customer for understanding
+                    the end goal and for defining clear and measurable requirements.
+                </div>
             </div>
-            <h3>Fast & Nimble</h3>
-            <div class="subheading">
-                Working closely with the customer for understanding the end goal and for defining clear and measurable
-                requirements.
+            <div class="block">
+                <div class="rounded-bg"></div>
+                <div class="header image second-image">
+                    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/reliability.svg" alt="">
+                </div>
+                <h3>Scalable Infrastructure</h3>
+                <div class="subheading">
+                    Transforming requirements
+                    into UI/UX designs,
+                    technical charts and making sure that we have everything
+                    in order.
+                </div>
             </div>
-        </div>
-        <div class="block">
-            <div class="header image">
-                <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/reliability.svg" alt="">
-            </div>
-            <h3>Scalable Infrastructure</h3>
-            <div class="subheading">
-                Transforming requirements into UI/UX designs, technical charts and making sure that we have everything
-                in order.
-            </div>
-        </div>
-        <div class="block">
-            <div class="header image">
-                <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/maintainability.svg" alt="">
-            </div>
-            <h3>Stable & Secure</h3>
-            <div class="subheading">
-                Writing modules, unit testing complex cases, setting up the servers, getting hands dirty.
+            <div class="block">
+                <div class="rounded-bg"></div>
+                <div class="header image">
+                    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/maintainability.svg" alt="">
+                </div>
+                <h3>Stable & Secure</h3>
+                <div class="subheading">
+                    Writing modules,
+                    unit testing complex cases, setting up the servers, getting hands dirty.
+                </div>
             </div>
         </div>
-    </div>
-    <section class="cta">
-        {% include 'components/cta_button.html' %}
     </section>
-</section>
+    <section class="cta cta-noodles">
+        <div id="cta">
+            <section class="bg bg-cta">
+                <div class="wrapper-cta">
+                    <div class="header header-cta">
+                        <a class="logo" href="/">
+                            <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/logo_cta.png" alt="">
+                        </a>
+                        <h2>What’s your Project About?</h2>
+                        <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+                        {% include 'components/cta_button.html' %}
+                    </div>
+                    <div class="project">
+                        <div class="image">
+                            <a>
+                                <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/abstract_cta.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
 {% endblock %}
 
 {% block footer %}

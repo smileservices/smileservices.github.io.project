@@ -1,0 +1,29 @@
+.intro.intro-showcase {
+  padding-top: 10.25rem;
+  .header.header-left-align {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .blocks{
+    .block{
+      .rounded-bg{
+        bottom: 14.5rem;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 576px){
+  .intro.intro-showcase{
+    padding-top: 4.25rem;
+  }
+}
+@media only screen and (max-width: 400px){
+  .intro.intro-showcase {
+    padding-left: 50px;
+    padding-right: 47px;
+    .header.header-left-align{
+      margin-bottom: 0.6625rem;
+    }
+  }
+}

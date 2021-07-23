@@ -3,4 +3,4 @@
 	url = https://github.com/smileservices/smileservices.github.io
 [submodule "content/blog"]
 	path = content/blog
-	url = git@github.com:smileservices/dev_blogpposts.git
+	url = https://github.com/smileservices/dev_blogpposts.git

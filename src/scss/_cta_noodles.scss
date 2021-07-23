@@ -1,0 +1,35 @@
+.cta.cta-noodles{
+  margin-bottom: 0;
+  #cta{
+    section{
+      margin-bottom: 0;
+      .wrapper-cta{
+        gap: 15rem;
+        .header{
+          margin-left: 50px;
+          max-width: 58.2rem;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1024px){
+  #cta{
+    section.bg-cta{
+      .wrapper-cta{
+        flex-direction: column;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 576px){
+  .cta.cta-noodles{
+    #cta{
+      section{
+        .wrapper-cta{
+          gap: 4rem;
+        }
+      }
+    }
+  }
+}
