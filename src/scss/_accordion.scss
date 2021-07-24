@@ -17,6 +17,7 @@
   gap: $padding-md;
   width: 100%;
   max-width: 97.125rem;
+  margin-bottom: 6rem;
 
   .accordion-item {
     display: flex;
@@ -54,7 +55,7 @@
         padding: 4rem 2rem 1rem 2rem;
         background-color: #ffffff;
         color: $color-gray-2;
-        animation: growDown 300ms ease-in-out forwards;
+        animation: growDown 50ms ease;
         h4 {
           padding: $padding-sm/2 $padding-sm;
           border-radius: $fontsize-sm/3;

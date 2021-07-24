@@ -71,6 +71,15 @@ header {
       display: none
     }
   }
+  header.blog {
+    padding: 15px;
+    .left-side {
+      display: none;
+    }
+    .right-side {
+      display: none
+    }
+  }
 }
 @media only screen and (max-width: 576px){
   header{

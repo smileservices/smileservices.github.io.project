@@ -1,72 +1,8 @@
 {% extends "base_homepage.html" %}
 {% block content %}
-{% include 'components/homepage/showcasing.html' %}
+{% include 'showcases/noodles_header.html' %}
 {% include "showcases/noodles_accordion.html" %}
-    <section class="intro intro-showcase">
-        <div class="header header-left-align">
-            <h2>Why work with us?</h2>
-        </div>
-        <div class="blocks">
-            <div class="block">
-                <div class="rounded-bg"></div>
-                <div class="header image">
-                    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/speed.svg" alt="">
-                </div>
-                <h3>Fast & Nimble</h3>
-                <div class="subheading">
-                    Working closely with the customer for understanding
-                    the end goal and for defining clear and measurable requirements.
-                </div>
-            </div>
-            <div class="block">
-                <div class="rounded-bg"></div>
-                <div class="header image second-image">
-                    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/reliability.svg" alt="">
-                </div>
-                <h3>Scalable Infrastructure</h3>
-                <div class="subheading">
-                    Transforming requirements
-                    into UI/UX designs,
-                    technical charts and making sure that we have everything
-                    in order.
-                </div>
-            </div>
-            <div class="block">
-                <div class="rounded-bg"></div>
-                <div class="header image">
-                    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/maintainability.svg" alt="">
-                </div>
-                <h3>Stable & Secure</h3>
-                <div class="subheading">
-                    Writing modules,
-                    unit testing complex cases, setting up the servers, getting hands dirty.
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="cta cta-noodles">
-        <div id="cta">
-            <section class="bg bg-cta">
-                <div class="wrapper-cta">
-                    <div class="header header-cta">
-                        <a class="logo" href="/">
-                            <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/logo_cta.png" alt="">
-                        </a>
-                        <h2>What’s your Project About?</h2>
-                        <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
-                        {% include 'components/cta_button.html' %}
-                    </div>
-                    <div class="project">
-                        <div class="image">
-                            <a>
-                                <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/images/abstract_cta.png" alt="">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </section>
+
 {% endblock %}
 
 {% block footer %}

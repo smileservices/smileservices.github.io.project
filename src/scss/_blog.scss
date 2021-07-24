@@ -1,0 +1,11 @@
+.blog {
+  background-color: #fff;
+  justify-content: space-between;
+  gap: 6rem;
+  padding: 6rem 10rem 4rem 10rem;
+  .right-side {
+    .subtext {
+      text-align: right;
+    }
+  }
+}
