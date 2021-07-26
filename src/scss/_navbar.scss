@@ -51,7 +51,7 @@ nav {
           position: absolute;
           top: $navbar-height;
           left: 0;
-          border-top: 1px solid $color-1;
+          border-top: 0.063rem solid $color-1;
           animation: growDown 300ms ease-in-out forwards;
           transform-origin: top center;
 

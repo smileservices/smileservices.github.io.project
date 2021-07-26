@@ -118,23 +118,23 @@ section.bg {
 @media only screen and (max-width: 576px){
   .intro{
     padding-top: 2.25rem;
-    padding-left: 66px;
-    padding-right: 50px;
+    padding-left: 4.125rem;
+    padding-right: 3.125rem;
     .header{
       h2{
-        font-size: 32px;
+          font-size: $fontsize-header-sub;
       }
       .subheading{
-        font-size: 16px;
+          font-size: $fontsize-md;
       }
     }
     .blocks{
       .block{
         h3{
-          font-size: 20px;
+          font-size: 1.25rem;
         }
         .subheading{
-          font-size: 16px;
+          font-size: $fontsize-md;
         }
       }
     }

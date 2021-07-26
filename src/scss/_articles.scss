@@ -1,31 +1,31 @@
 section.articles {
   margin-bottom: 1rem;
   background-color: #fff;
-  margin-left: -31px;
-  margin-right: -31px;
-  margin-top: -48px;
+  margin-left: -1.938rem;
+  margin-right: -1.938rem;
+  margin-top: -3rem;
   gap: 0;
   .post-preview{
     align-items: flex-start;
     margin: 2rem auto;
-    max-width: 650px;
+    max-width: 40.625rem;
     .post-title{
-      font-size: 28px;
+      font-size: 1.75rem;
       font-weight: 600;
       color: #2C2C31;
-      line-height: 32.81px;
+      line-height: 2rem;
     }
     .article-summary{
-      margin-top: 12px;
-      line-height: 32px;
-      font-size: 24px;
+      margin-top: 0.75rem;
+      line-height: 2rem;
+      font-size: $fontsize-section-head;
       font-weight: 400;
       color: #4C4C4E;
     }
     .post-meta {
-      font-size: 22px;
+      font-size: 1.375rem;
       color: #6E7B89;
-      margin-top: 12px;
+      margin-top: 0.75rem;
     }
   }
   .post-preview:last-child{
@@ -42,25 +42,25 @@ section.article {
   .header{
     .meta{
       display: flow-root;
-      font-size: 22px;
+      font-size: 1.375rem;
       color: #6E7B89;
-      line-height: 32px;
+      line-height: 2rem;
       a{
         color: #6E7B89;
       }
     }
   }
   align-items: flex-start;
-  margin-left: -31px;
-  margin-right: -31px;
+  margin-left: -1.938rem;
+  margin-right: -1.938rem;
   background-color: #fff;
-  margin-top: -50px;
-  padding-top: 49px;
+  margin-top: -3.125rem;
+  padding-top: 3.063rem;
   p{
     margin-left: auto;
     margin-right: auto;
-    font-size: 24px;
-    line-height: 32px;
+    font-size: $fontsize-section-head;
+    line-height: 2rem;
     font-weight: 400;
   }
   .header {
@@ -77,30 +77,33 @@ section.article {
   }
   h3 {
     margin-top: $padding-md;
-    margin-bottom: $padding-sm;
+    margin-bottom: 1.875rem;
     margin-left: auto;
     margin-right: auto;
-    font-size: 28px;
+    font-size: 1.75rem;
     font-weight: 700;
   }
 
   ul {
-    margin-left: auto;
     margin-right: auto;
     list-style: disc;
     margin-bottom: $padding-md;
+    margin-left: 1.875rem;
+    font-size: $fontsize-section-head;
+    line-height: 2.5rem;
     li {padding-left: $padding-md}
   }
   ol{
-    margin-left: auto;
     margin-right: auto;
-    width: 49rem;
+    margin-left: 1.875rem;
+    font-size: $fontsize-section-head;
+    line-height: 2.5rem;
   }
 
   .highlight {
     margin-bottom: $padding-md;
     width: 100%;
-    max-height: 450px;
+    max-height: 28.125rem;
     overflow: auto;
   }
   .tags {
@@ -110,10 +113,10 @@ section.article {
 }
 @media only screen and (max-width: 800px){
   section.article {
-    margin-top: -79px;
-    padding-top: 49px;
-    padding-left: 40px;
-    padding-right: 40px;
+    margin-top: -4.938rem;
+    padding-top: 3.063rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
     .wrapper-article{
       width: 40rem;
     }
@@ -125,25 +128,36 @@ section.article {
       margin: 2rem 3rem;
       width: auto;
       .post-title {
-        font-size: 20px;
+        font-size: 1.25rem;
       }
       .article-summary{
-        font-size: 20px;
+        font-size: 1.25rem;
       }
       .post-meta {
-        font-size: 20px;
+        font-size: 1.25rem;
       }
     }
   }
     section.article {
       .header{
         h2{
-          font-size: 24px;
+          font-size: $fontsize-section-head;
+          line-height: 2.188rem;
         }
       }
-      p{
-        font-size: 20px;
+      ul{
+        font-size: 0.875rem;
       }
+      ol{
+        font-size: 0.875rem;
+      }
+  }
+}
+@media only screen and (max-width: 680px){
+  section.article {
+    .wrapper-article{
+      width: 30rem;
+    }
   }
 }
 @media only screen and (max-width: 580px){
@@ -154,8 +168,31 @@ section.article {
     }
   }
   section.article {
+    .header{
+      .meta{
+        font-size: $fontsize-md;
+      }
+    }
     .wrapper-article{
-      width: 20rem;
+      width: 25rem;
+    }
+    h3{
+      font-size: $fontsize-md;
+    }
+    p{
+      font-size: $fontsize-md;
+      margin-bottom: 1.875rem;
+      line-height: 1.25rem;
+    }
+  }
+}
+@media only screen and (max-width: 420px){
+  section.article{
+    .wrapper-article {
+      width: 19rem;
+    }
+    ul {
+      font-size: 0.75rem;
     }
   }
 }

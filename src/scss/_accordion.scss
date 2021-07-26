@@ -1,14 +1,14 @@
 #section-accordion{
   margin-bottom: 0;
   background: #fff;
-  margin-left: -31px;
-  margin-right: -31px;
-  margin-top: -64px;
+  margin-left: 1.938rem;
+  margin-right: 1.938rem;
+  margin-top: -4rem;
   .accordion-title{
     font-weight: 700;
-    font-size: 56px;
-    margin-top: 100px;
-    margin-bottom: 43px;
+    font-size: 3.5rem;
+    margin-top: 6.25rem;
+    margin-bottom: 2.688rem;
   }
 }
 .accordion-container {
@@ -24,13 +24,13 @@
     flex-direction: column;
 
     .title {
-      padding: 26px;
+      padding: 1.625rem;
       background-color: $color-2-1;
-      font-size: 24px;
+      font-size: $fontsize-section-head;
       font-weight: 400;
       cursor: pointer;
-      border-top: 2px solid #D9D9F5;
-      border-bottom: 2px solid #D9D9F5;
+      border-top: 0.125rem solid #D9D9F5;
+      border-bottom: 0.125rem solid #D9D9F5;
 
       &:hover {
         background-color: $color-1-1;
@@ -45,10 +45,10 @@
     &.open {
       .title {
         background-color: #f8f8ff;
-        padding: 26px;
-        font-size: 24px;
+        padding: 1.625rem;
+        font-size: $fontsize-section-head;
         font-weight: 400;
-        border-bottom: 2px solid #D9D9F5;
+        border-bottom: 0.125rem solid #D9D9F5;
       }
       .content {
         display: block;
@@ -62,11 +62,11 @@
           display: inline-block;
           color: #4253F5;
           background-color: #CBD0FF;
-          margin-bottom: 20px;
+          margin-bottom: 1.25rem;
         }
         p{
-          font-size: 24px;
-          line-height: 37px;
+          font-size: $fontsize-section-head;
+          line-height: 2.313rem;
           color: #2C2C31;
         }
       }
@@ -91,9 +91,9 @@
 @media only screen and (max-width: 576px){
   #section-accordion{
     .accordion-title{
-      font-size: 32px;
-      margin-top: 60px;
-      margin-bottom: 26px;
+      font-size: $fontsize-header-sub;
+      margin-top: 3.75rem;
+      margin-bottom: 1.625rem;
     }
   }
   .accordion-container{
@@ -102,20 +102,20 @@
     .accordion-item{
       .title{
         border-bottom: none;
-        font-size: 16px;
+        font-size: $fontsize-md;
       }
     }
     .accordion-item:last-child{
-      border-bottom: 2px solid #D9D9F5;
+      border-bottom: 0.125rem solid #D9D9F5;
     }
     .accordion-item.open{
       .title{
-        font-size: 16px;
+        font-size: $fontsize-md;
       }
       .content{
         padding: 2rem 1rem 1rem 1rem;
         p{
-          font-size: 16px;
+          font-size: $fontsize-md;
         }
       }
     }
