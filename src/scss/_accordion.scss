@@ -1,8 +1,8 @@
 #section-accordion{
   margin-bottom: 0;
   background: #fff;
-  margin-left: 1.938rem;
-  margin-right: 1.938rem;
+  margin-left: -2rem;
+  margin-right: -2rem;
   margin-top: -4rem;
   .accordion-title{
     font-weight: 700;
@@ -14,7 +14,6 @@
 .accordion-container {
   display: flex;
   flex-direction: column;
-  gap: $padding-md;
   width: 100%;
   max-width: 97.125rem;
   margin-bottom: 6rem;
@@ -30,8 +29,6 @@
       font-weight: 400;
       cursor: pointer;
       border-top: 0.125rem solid #D9D9F5;
-      border-bottom: 0.125rem solid #D9D9F5;
-
       &:hover {
         background-color: $color-1-1;
         color: $color-2;
@@ -71,6 +68,9 @@
         }
       }
     }
+  }
+  .accordion-item:last-child{
+    border-bottom: 0.125rem solid #D9D9F5;
   }
 }
 @media only screen and (max-width: 1600px){
