@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>Django Logging</title>
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500,700">
+    <link href="/theme/css/main.css" rel="stylesheet">
+    <link href="/theme/icons/style.css" rel="stylesheet">
+<link href="/theme/css/code_blocks/darkly.css" rel="stylesheet">
+
+
+
+
+
+<meta name="description" content="Setting up logging is crucial to monitoring any app. This way you know what works and what doesn't. If done correctly it will save a lot...">
+
+<meta name="author" content="vladimir gorea">
+
+<meta name="tags" content="django">
+<meta name="tags" content="logging">
+
+    <meta property="og:locale" content="">
+    <meta property="og:site_name" content="smile services">
+
+<meta property="og:type" content="article">
+<meta property="article:author" content="/author/vladimir-gorea.html">
+<meta property="og:url" content="/blog/2019-04-03-django-logging.html">
+<meta property="og:title" content="Django Logging">
+<meta property="article:published_time" content="2019-04-03 10:20:00+02:00">
+<meta property="og:description" content="Setting up logging is crucial to monitoring any app. This way you know what works and what doesn't. If done correctly it will save a lot...">
+
+<meta property="og:image" content="/theme/images/post-bg.jpg">
+    <link rel="icon" type="image/png" href="/theme/images/logo.svg">
+</head>
+
+<body>
+<nav>
+    <div class="left-side">
+        <a class="logo" href="/">
+            <img src="/theme/images/logo.svg" alt="">
+            SmileServices.dev
+        </a>
+    </div>
+    <div class="right-side">
+        <div class="menu-container" id="navbar-menu">
+            <ul class="nav-menu mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/noodles.html">Showcases</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#process">Work Process</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cta-button" onclick="openModal('modal-contact')">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="toggle-nav-menu" onclick="document.getElementById('navbar-menu').classList.toggle('open')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="none">
+                <path d="M0 0.137695H20V2.1377H0V0.137695Z" fill="black"/>
+                <path d="M4 5H20V7H4V5Z" fill="black"/>
+                <path d="M20 9.8623H8V11.8623H20V9.8623Z" fill="black"/>
+            </svg>
+        </div>
+    </div>
+</nav><header class="blog">
+    <div class="left-side">
+        <h1>Blog</h1>
+    </div>
+    <div class="right-side">
+        <div class="subtext">
+            <h3>Cost effective solutions</h3>
+            <h3>Productive meetings with fast deliveries</h3>
+            <h3>24/7 support with sameday response</h3>
+        </div>
+    </div>
+</header>
+<!-- Post Content -->
+<section class="article">
+    <div class="wrapper-article">
+        <div class="header">
+            <h2>Django Logging</h2>
+            <div class="subheading">
+                
+            </div>
+            <div class="smalltext">
+            <span class="meta">Posted by
+                <a href="/author/vladimir-gorea.html">vladimir gorea</a>
+             on Mi 03 April 2019</span>
+<span class="meta">Updated on So 05 Juli 2020</span>            </div>
+        </div>
+        <h3>Intro</h3>
+<p>Setting up logging is crucial to monitoring any app. This way you know what works and what doesn't. If done correctly it will save a lot of time of debugging.  </p>
+<h3>Django implementation of logging</h3>
+<p>Django uses the pyhton logging module. Concepts to understand are <code>loggers</code>, <code>handlers</code>, <code>filters</code> and <code>formatters</code>:</p>
+<ol>
+<li>Loggers are messages containers</li>
+<li>Handlers are directing loggers to various output destinations like files, console, email, etc</li>
+<li>Filters can be used for both loggers and handlers</li>
+<li>Formatters handle how to output the messages. Belong to handlers</li>
+</ol>
+<h3>Basic usage</h3>
+<p>Set up logging in settings.py</p>
+<div class="highlight"><pre><span></span><span class="n">LOGGING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;disable_existing_loggers&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;formatters&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;verbose&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{levelname}</span><span class="s1"> </span><span class="si">{asctime}</span><span class="s1"> </span><span class="si">{module}</span><span class="s1"> </span><span class="si">{process:d}</span><span class="s1"> </span><span class="si">{thread:d}</span><span class="s1"> </span><span class="si">{message}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="s1">&#39;{&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;simple&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;format&#39;</span><span class="p">:</span> <span class="s1">&#39;</span><span class="si">{levelname}</span><span class="s1"> </span><span class="si">{message}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;style&#39;</span><span class="p">:</span> <span class="s1">&#39;{&#39;</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;console&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;logging.StreamHandler&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;formatter&#39;</span><span class="p">:</span> <span class="s1">&#39;verbose&#39;</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;root&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;console&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;WARNING&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;django&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;console&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;propagate&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;someapp.urls&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;handlers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;console&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;propagate&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Set up logging in your app:</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>Resources for reading</h3>
+<p>These resources are great for understanding why and how to use logging in Django:</p>
+<ol>
+<li><a href="https://lincolnloop.com/blog/django-logging-right-way/">django logging the right way</a></li>
+<li><a href="https://djangodeconstructed.com/2018/12/18/django-and-python-logging-in-plain-english/">django and logging in plain english</a></li>
+<li><a href="https://mattsegal.dev/file-logging-django.html">django logging in production</a></li>
+</ol>
+        <div class="tags">
+<a href="/tag/django.html">django</a><a href="/tag/logging.html">logging</a>        </div>
+    </div>
+</section>
+
+<section class="cta cta-noodles">
+    <div id="cta">
+        <section class="bg bg-cta">
+            <div class="wrapper-cta">
+                <div class="header header-cta">
+                    <a class="logo" href="/">
+                        <img src="/theme/images/logo_cta.png" alt="">
+                    </a>
+                    <h2>What’s your Project About?</h2>
+                    <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+
+<a onclick="openModal('modal-project')" class="cta-button">Tell Us About Your Project</a>                </div>
+                <div class="project">
+                    <div class="image">
+                        <a>
+                            <img src="/theme/images/abstract_cta.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+<footer>
+    <div class="left-side">
+        <a class="logo" href="/">
+            <img src="/theme/images/logo.svg" alt="">
+            SmileServices.dev
+        </a>
+        <div class="small">© 2020, smileservices.dev All Rights Reserved.</div>
+    </div>
+    <div class="right-side">
+        <a href="/#showcases">Showcases</a>
+        <a href="/#process">Work Process</a>
+        <a href="/blog">Blog</a>
+        <a onclick="openModal('modal-contact')">Contact</a>
+    </div>
+</footer><div class="modal-container" onclick="closeModal()">
+<div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close icon-close" onclick="closeModal()"></span>
+<div class="content" id="modal-project">
+    <div class="header">
+        <h3>What's Your Project Like?</h3>
+        <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+    </div>
+
+    <form action="https://formspree.io/mnqgorpj" method="POST">
+        <input type="email" name="_replyto" required placeholder="your email"/>
+        <textarea name="message" cols="30" rows="7" placeholder="your message" required></textarea>
+        <button>Send</button>
+    </form>
+</div>
+</div>
+</div><div class="modal-container" onclick="closeModal()">
+<div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close icon-close" onclick="closeModal()"></span>
+<div class="content" id="modal-contact">
+    <div class="header">
+        <h3>We'll Respond ASAP</h3>
+        <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+    </div>
+
+    <form action="https://formspree.io/mnqgorpj" method="POST">
+        <input type="email" name="_replyto" required placeholder="your email"/>
+        <textarea name="message" cols="30" rows="4" placeholder="your message" required></textarea>
+        <button>Send</button>
+    </form>
+
+    <div class="company-info">
+        <div class="header">
+            <h4>SC Smile Services SRL</h4>
+            <p>Registered in EU, Romania</p>
+            <p>Bucharest, Aleea Zorelelor no 6</p>
+        </div>
+        <div class="subheading">
+            <p>Operating since December 2009</p>
+            <p>VAT - VIES RO26286942</p>
+        </div>
+    </div>
+</div>
+</div>
+</div><script>
+    function openModal(id) {
+        document.getElementsByTagName('body')[0].classList.add('has-modal');
+        document.getElementById(id).parentNode.parentNode.classList.add('open');
+    }
+    function closeModal() {
+        document.getElementsByTagName('body')[0].classList.remove('has-modal');
+        Array.from(document.getElementsByClassName('modal-container open'))
+            .map(modal=>modal.classList.remove('open'));
+    }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>Handling Images with Django and nginx in production</title>
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500,700">
+    <link href="/theme/css/main.css" rel="stylesheet">
+    <link href="/theme/icons/style.css" rel="stylesheet">
+<link href="/theme/css/code_blocks/darkly.css" rel="stylesheet">
+
+
+
+
+
+<meta name="description" content="How to handle images in production with django and nginx is not difficult but the documentation on this subject is lacking. This is an...">
+
+<meta name="author" content="vladimir gorea">
+
+<meta name="tags" content="django">
+<meta name="tags" content="images">
+<meta name="tags" content="production-ready">
+<meta name="tags" content="versatileimagefield">
+<meta name="tags" content="thumbnails">
+
+    <meta property="og:locale" content="">
+    <meta property="og:site_name" content="smile services">
+
+<meta property="og:type" content="article">
+<meta property="article:author" content="/author/vladimir-gorea.html">
+<meta property="og:url" content="/blog/2020-09-22-django-handling-images-in-production.html">
+<meta property="og:title" content="Handling Images with Django and nginx in production">
+<meta property="article:published_time" content="2020-09-22 10:00:00+02:00">
+<meta property="og:description" content="How to handle images in production with django and nginx is not difficult but the documentation on this subject is lacking. This is an...">
+
+<meta property="og:image" content="/theme/images/post-bg.jpg">
+    <link rel="icon" type="image/png" href="/theme/images/logo.svg">
+</head>
+
+<body>
+<nav>
+    <div class="left-side">
+        <a class="logo" href="/">
+            <img src="/theme/images/logo.svg" alt="">
+            SmileServices.dev
+        </a>
+    </div>
+    <div class="right-side">
+        <div class="menu-container" id="navbar-menu">
+            <ul class="nav-menu mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/noodles.html">Showcases</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#process">Work Process</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cta-button" onclick="openModal('modal-contact')">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="toggle-nav-menu" onclick="document.getElementById('navbar-menu').classList.toggle('open')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="none">
+                <path d="M0 0.137695H20V2.1377H0V0.137695Z" fill="black"/>
+                <path d="M4 5H20V7H4V5Z" fill="black"/>
+                <path d="M20 9.8623H8V11.8623H20V9.8623Z" fill="black"/>
+            </svg>
+        </div>
+    </div>
+</nav><header class="blog">
+    <div class="left-side">
+        <h1>Blog</h1>
+    </div>
+    <div class="right-side">
+        <div class="subtext">
+            <h3>Cost effective solutions</h3>
+            <h3>Productive meetings with fast deliveries</h3>
+            <h3>24/7 support with sameday response</h3>
+        </div>
+    </div>
+</header>
+<!-- Post Content -->
+<section class="article">
+    <div class="wrapper-article">
+        <div class="header">
+            <h2>Handling Images with Django and nginx in production</h2>
+            <div class="subheading">
+                
+            </div>
+            <div class="smalltext">
+            <span class="meta">Posted by
+                <a href="/author/vladimir-gorea.html">vladimir gorea</a>
+             on Di 22 September 2020</span>
+<span class="meta">Updated on Di 22 September 2020</span>            </div>
+        </div>
+        <h3>Intro</h3>
+<p>Everytime I have to implement adding images to a project I feel a "oh boy, here we go again" type of feeling. I've done it multiple times but each time I have to go through the process of searching through the django packages for something that can fulfill my requirements and then fiddling with storage/triggers for delete and templates. While the process is simple, the docs don't have fully working production grade examples. This is what this article is trying to do.</p>
+<p>This is an article meant to address this issue by providing clear instructions and working examples on how to set up a production ready image handling with django and versatileimagefield. We cover which library is best to use for handling images and how to use it for creating thumbnails and serve them. We also set up a production ready working example along with nginx configuration.</p>
+<h3>Libraries</h3>
+<ul>
+<li>sorl-thumbnail.readthedocs.io</li>
+<li>https://easy-thumbnails.readthedocs.io/</li>
+<li>https://django-versatileimagefield.readthedocs.io/</li>
+</ul>
+<h3>Requirements</h3>
+<p>When processing user uploaded images we have to take care of processing them: 
+1. Validate image
+2. Save Image to storage
+3. Create optimized thumbnails on saving an image
+4. If delete parent model, have to delete the files also</p>
+<h3>Versatile Image Field</h3>
+<p>I think this is the best image handling library to work with Django as it has the most features and is widely used in big projects like Saleor.</p>
+<p>Pros: </p>
+<ul>
+<li>Widely used</li>
+<li>Easy to set up</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>Need to use the post_delete signal to clear the files and post_save to create the thumbnails:</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># someapp/models.py</span>
+<span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.dispatch</span> <span class="kn">import</span> <span class="n">receiver</span>
+
+<span class="kn">from</span> <span class="nn">versatileimagefield.fields</span> <span class="kn">import</span> <span class="n">VersatileImageField</span>
+
+<span class="k">class</span> <span class="nc">ExampleImageModel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">VersatileImageField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s1">&#39;images/&#39;</span><span class="p">)</span>
+
+<span class="nd">@receiver</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">signals</span><span class="o">.</span><span class="n">post_delete</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="n">ExampleImageModel</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">delete_ExampleImageModel_images</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes ExampleImageModel image renditions on post_delete.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Deletes Image Renditions</span>
+    <span class="n">instance</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">delete_all_created_images</span><span class="p">()</span>
+    <span class="c1"># Deletes Original Image</span>
+    <span class="n">instance</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>Install</h3>
+<p>Add with pip</p>
+<div class="highlight"><pre><span></span>pip install django-versatileimagefield
+</pre></div>
+
+
+<p>In settings.py</p>
+<div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="c1"># All your other apps here</span>
+    <span class="s1">&#39;versatileimagefield&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p>Use in models:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">versatileimagefield.fields</span> <span class="kn">import</span> <span class="n">PPOIField</span><span class="p">,</span> <span class="n">VersatileImageField</span>
+
+<span class="k">class</span> <span class="nc">SomeModel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">VersatileImageField</span><span class="p">(</span>
+        <span class="n">upload_to</span><span class="o">=</span><span class="s2">&quot;images&quot;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+</pre></div>
+
+
+<p>Display in template <code>&lt;img src="{{ result.image.image_file.thumbnail.350x350 }}"&gt;</code></p>
+<h3>Example model with image field from URL (for scraped content):</h3>
+<p>How it works:</p>
+<ol>
+<li>The model has an image_url field linking to an external image file</li>
+<li>Upon saving the model we get the image from the url and save it to the image_file field</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1"># models.py</span>
+<span class="k">class</span> <span class="nc">StudyResourceImage</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">study_resource</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="n">StudyResource</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;images&#39;</span><span class="p">)</span>
+    <span class="n">image_file</span> <span class="o">=</span> <span class="n">VersatileImageField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s1">&#39;tutorials&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">image_url</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">URLField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># this saves the image from url anytime model is created with image_url</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_url</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">image_file</span><span class="p">:</span>
+            <span class="n">img_temp</span> <span class="o">=</span> <span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">delete</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">img_temp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">urlopen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image_url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image_file</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;image_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">study_resource</span><span class="o">.</span><span class="n">pk</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">uuid4</span><span class="p">()</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">image_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">File</span><span class="p">(</span><span class="n">img_temp</span><span class="p">))</span>
+            <span class="n">img_temp</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span><span class="n">t</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">StudyResourceImage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+
+
+<h3>Example implementation of VersatileImageField for production</h3>
+<ul>
+<li>Delete all produced images sets with post_delete signal</li>
+<li>Create thumbs each time we save/update the image</li>
+<li>Use VERSATILEIMAGEFIELD_RENDITION_KEY_SETS for specifying how we create the thumbnails</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># settings.py</span>
+
+<span class="n">VERSATILEIMAGEFIELD_RENDITION_KEY_SETS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;image&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;small&#39;</span><span class="p">,</span> <span class="s1">&#39;thumbnail__180x180&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;thumbnail__220x220&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;large&#39;</span><span class="p">,</span> <span class="s1">&#39;thumbnail__320x320&#39;</span><span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">MEDIA_ROOT</span> <span class="o">=</span> <span class="n">env</span><span class="p">(</span><span class="s1">&#39;MEDIA_ROOT&#39;</span><span class="p">)</span>
+<span class="n">MEDIA_URL</span> <span class="o">=</span> <span class="n">env</span><span class="p">(</span><span class="s1">&#39;MEDIA_URL&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Inside the .env file:</p>
+<div class="highlight"><pre><span></span><span class="err">MEDIA_ROOT=/home/user/MEDIA</span>
+<span class="err">MEDIA_URL=/media/</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="c1"># models.py</span>
+
+<span class="kn">from</span> <span class="nn">versatileimagefield.fields</span> <span class="kn">import</span> <span class="n">VersatileImageField</span>
+<span class="kn">from</span> <span class="nn">versatileimagefield.image_warmer</span> <span class="kn">import</span> <span class="n">VersatileImageFieldWarmer</span>
+<span class="kn">from</span> <span class="nn">versatileimagefield.utils</span> <span class="kn">import</span> <span class="n">build_versatileimagefield_url_set</span>
+
+
+<span class="k">class</span> <span class="nc">ImageModel</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">image_file</span> <span class="o">=</span> <span class="n">VersatileImageField</span><span class="p">(</span><span class="n">upload_to</span><span class="o">=</span><span class="s1">&#39;images&#39;</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">sizes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        to get access to image size key sets by dictionary</span>
+<span class="sd">        this returns {</span>
+<span class="sd">            small: url_to_small_thumb,</span>
+<span class="sd">            medium: url_to_medium_thumb,</span>
+<span class="sd">            large: url_to_large_thumb,</span>
+<span class="sd">        }</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">build_versatileimagefield_url_set</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">image_file</span><span class="p">,</span>
+            <span class="n">settings</span><span class="o">.</span><span class="n">VERSATILEIMAGEFIELD_RENDITION_KEY_SETS</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+
+
+<span class="nd">@receiver</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">signals</span><span class="o">.</span><span class="n">post_delete</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="n">ImageModel</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">delete_images</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Deletes Image image renditions on post_delete.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">instance</span><span class="o">.</span><span class="n">image_file</span><span class="o">.</span><span class="n">delete_all_created_images</span><span class="p">()</span>
+    <span class="n">instance</span><span class="o">.</span><span class="n">image_file</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">save</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="nd">@receiver</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">signals</span><span class="o">.</span><span class="n">post_save</span><span class="p">,</span> <span class="n">sender</span><span class="o">=</span><span class="n">ImageModel</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">warm_images</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ensures Person head shots are created post-save&quot;&quot;&quot;</span>
+    <span class="n">sr_images_warmer</span> <span class="o">=</span> <span class="n">VersatileImageFieldWarmer</span><span class="p">(</span>
+        <span class="n">instance_or_queryset</span><span class="o">=</span><span class="n">instance</span><span class="p">,</span>
+        <span class="n">rendition_key_set</span><span class="o">=</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="c1"># name of keyset key</span>
+        <span class="n">image_attr</span><span class="o">=</span><span class="s1">&#39;image_file&#39;</span>    <span class="c1"># name of versatileimagefield field on the model</span>
+    <span class="p">)</span>
+    <span class="c1"># this should be logged somewhere to catch potential errors</span>
+    <span class="n">num_created</span><span class="p">,</span> <span class="n">failed_to_create</span> <span class="o">=</span> <span class="n">sr_images_warmer</span><span class="o">.</span><span class="n">warm</span><span class="p">()</span>
+</pre></div>
+
+
+<p>If we'are using django-rest and serving serialized instances we need to make a serializer:</p>
+<div class="highlight"><pre><span></span><span class="c1"># serializers.py</span>
+<span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">serializers</span>
+<span class="kn">from</span> <span class="nn">versatileimagefield.serializers</span> <span class="kn">import</span> <span class="n">VersatileImageFieldSerializer</span>
+
+<span class="k">class</span> <span class="nc">ImageModelSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="n">image_file</span> <span class="o">=</span> <span class="n">VersatileImageFieldSerializer</span><span class="p">(</span>
+        <span class="n">sizes</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">VERSATILEIMAGEFIELD_RENDITION_KEY_SETS</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">ImageModel</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">,</span> <span class="s1">&#39;image_file&#39;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>This is how we access the images sets in template: 
+<code>&lt;img class="primary-image" src="{{ image_model_instance.sizes.medium }}" alt=""&gt;</code></p>
+<h1>Serving media files with NGINX</h1>
+<p>To serve the static files in production we have to point to the absolute path of Media folder. 
+Inside the nginx configuration file /etc/nginx/sites-available/<filename></p>
+<div class="highlight"><pre><span></span>    location /media/ <span class="o">{</span>                                                                           
+        <span class="nb">alias</span> /home/user/MEDIA/<span class="p">;</span>                                
+    <span class="o">}</span>
+</pre></div>
+
+
+<p>Next, test the config file and restart the services</p>
+<div class="highlight"><pre><span></span>nginx -t
+systemctl restart nginx.service
+systemctl restart &lt;app gunicorn instance&gt;
+</pre></div>
+        <div class="tags">
+<a href="/tag/django.html">django</a><a href="/tag/images.html">images</a><a href="/tag/production-ready.html">production-ready</a><a href="/tag/versatileimagefield.html">versatileimagefield</a><a href="/tag/thumbnails.html">thumbnails</a>        </div>
+    </div>
+</section>
+
+<section class="cta cta-noodles">
+    <div id="cta">
+        <section class="bg bg-cta">
+            <div class="wrapper-cta">
+                <div class="header header-cta">
+                    <a class="logo" href="/">
+                        <img src="/theme/images/logo_cta.png" alt="">
+                    </a>
+                    <h2>What’s your Project About?</h2>
+                    <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+
+<a onclick="openModal('modal-project')" class="cta-button">Tell Us About Your Project</a>                </div>
+                <div class="project">
+                    <div class="image">
+                        <a>
+                            <img src="/theme/images/abstract_cta.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+<footer>
+    <div class="left-side">
+        <a class="logo" href="/">
+            <img src="/theme/images/logo.svg" alt="">
+            SmileServices.dev
+        </a>
+        <div class="small">© 2020, smileservices.dev All Rights Reserved.</div>
+    </div>
+    <div class="right-side">
+        <a href="/#showcases">Showcases</a>
+        <a href="/#process">Work Process</a>
+        <a href="/blog">Blog</a>
+        <a onclick="openModal('modal-contact')">Contact</a>
+    </div>
+</footer><div class="modal-container" onclick="closeModal()">
+<div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close icon-close" onclick="closeModal()"></span>
+<div class="content" id="modal-project">
+    <div class="header">
+        <h3>What's Your Project Like?</h3>
+        <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+    </div>
+
+    <form action="https://formspree.io/mnqgorpj" method="POST">
+        <input type="email" name="_replyto" required placeholder="your email"/>
+        <textarea name="message" cols="30" rows="7" placeholder="your message" required></textarea>
+        <button>Send</button>
+    </form>
+</div>
+</div>
+</div><div class="modal-container" onclick="closeModal()">
+<div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close icon-close" onclick="closeModal()"></span>
+<div class="content" id="modal-contact">
+    <div class="header">
+        <h3>We'll Respond ASAP</h3>
+        <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+    </div>
+
+    <form action="https://formspree.io/mnqgorpj" method="POST">
+        <input type="email" name="_replyto" required placeholder="your email"/>
+        <textarea name="message" cols="30" rows="4" placeholder="your message" required></textarea>
+        <button>Send</button>
+    </form>
+
+    <div class="company-info">
+        <div class="header">
+            <h4>SC Smile Services SRL</h4>
+            <p>Registered in EU, Romania</p>
+            <p>Bucharest, Aleea Zorelelor no 6</p>
+        </div>
+        <div class="subheading">
+            <p>Operating since December 2009</p>
+            <p>VAT - VIES RO26286942</p>
+        </div>
+    </div>
+</div>
+</div>
+</div><script>
+    function openModal(id) {
+        document.getElementsByTagName('body')[0].classList.add('has-modal');
+        document.getElementById(id).parentNode.parentNode.classList.add('open');
+    }
+    function closeModal() {
+        document.getElementsByTagName('body')[0].classList.remove('has-modal');
+        Array.from(document.getElementsByClassName('modal-container open'))
+            .map(modal=>modal.classList.remove('open'));
+    }
+</script>
+</body>
+
+</html>

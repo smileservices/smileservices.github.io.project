@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>smile services - Tag security</title>
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,500,700">
+    <link href="/theme/css/main.css" rel="stylesheet">
+    <link href="/theme/icons/style.css" rel="stylesheet">
+
+
+
+    <meta property="og:locale" content="">
+    <meta property="og:site_name" content="smile services">
+    <link rel="icon" type="image/png" href="/theme/images/logo.svg">
+</head>
+
+<body>
+<nav>
+    <div class="left-side">
+        <a class="logo" href="/">
+            <img src="/theme/images/logo.svg" alt="">
+            SmileServices.dev
+        </a>
+    </div>
+    <div class="right-side">
+        <div class="menu-container" id="navbar-menu">
+            <ul class="nav-menu mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/noodles.html">Showcases</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#process">Work Process</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link cta-button" onclick="openModal('modal-contact')">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <div class="toggle-nav-menu" onclick="document.getElementById('navbar-menu').classList.toggle('open')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="none">
+                <path d="M0 0.137695H20V2.1377H0V0.137695Z" fill="black"/>
+                <path d="M4 5H20V7H4V5Z" fill="black"/>
+                <path d="M20 9.8623H8V11.8623H20V9.8623Z" fill="black"/>
+            </svg>
+        </div>
+    </div>
+</nav><header>
+    <div class="left-side">
+        <h1>Blog</h1>
+        <div class="subheading">
+            <h3>Entries containing <strong>#security</strong></h3>
+        </div>
+    </div>
+    <div class="right-side">
+        <div class="subtext">
+            <h3>Cost <span class="blue-text">effective</span> solutions</h3>
+            <h3>Productive meetings with <span class="blue-text">fast deliveries</span></h3>
+            <h3><span class="blue-text">24/7 support</span> with sameday response</h3>
+        </div>
+    </div>
+</header>
+<section class="articles">
+    <div class="post-preview">
+        <a href="/blog/2018-11-03-securing-linux-web-server.html" rel="bookmark"
+           title="Permalink to Securing Linux Web Servers">
+            <h2 class="post-title">
+                Securing Linux Web Servers
+            </h2>
+        </a>
+        <p class="article-summary">
+            What does it take to make a linux server secure? Close all the doors and put on good locks.
+        </p>
+        <p class="post-meta">Posted on Sa 03 November 2018</p>
+    </div>
+</section>
+
+<section class="cta cta-noodles">
+    <div id="cta">
+        <section class="bg bg-cta">
+            <div class="wrapper-cta">
+                <div class="header header-cta">
+                    <a class="logo" href="/">
+                        <img src="/theme/images/logo_cta.png" alt="">
+                    </a>
+                    <h2>What’s your Project About?</h2>
+                    <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+
+<a onclick="openModal('modal-project')" class="cta-button">Tell Us About Your Project</a>                </div>
+                <div class="project">
+                    <div class="image">
+                        <a>
+                            <img src="/theme/images/abstract_cta.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+<footer>
+    <div class="left-side">
+        <a class="logo" href="/">
+            <img src="/theme/images/logo.svg" alt="">
+            SmileServices.dev
+        </a>
+        <div class="small">© 2020, smileservices.dev All Rights Reserved.</div>
+    </div>
+    <div class="right-side">
+        <a href="/#showcases">Showcases</a>
+        <a href="/#process">Work Process</a>
+        <a href="/blog">Blog</a>
+        <a onclick="openModal('modal-contact')">Contact</a>
+    </div>
+</footer><div class="modal-container" onclick="closeModal()">
+<div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close icon-close" onclick="closeModal()"></span>
+<div class="content" id="modal-project">
+    <div class="header">
+        <h3>What's Your Project Like?</h3>
+        <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+    </div>
+
+    <form action="https://formspree.io/mnqgorpj" method="POST">
+        <input type="email" name="_replyto" required placeholder="your email"/>
+        <textarea name="message" cols="30" rows="7" placeholder="your message" required></textarea>
+        <button>Send</button>
+    </form>
+</div>
+</div>
+</div><div class="modal-container" onclick="closeModal()">
+<div class="modal-content" onclick="event.stopPropagation()">
+    <span class="close icon-close" onclick="closeModal()"></span>
+<div class="content" id="modal-contact">
+    <div class="header">
+        <h3>We'll Respond ASAP</h3>
+        <div class="subheading">We would love to know about your line of business and how we can help you grow!</div>
+    </div>
+
+    <form action="https://formspree.io/mnqgorpj" method="POST">
+        <input type="email" name="_replyto" required placeholder="your email"/>
+        <textarea name="message" cols="30" rows="4" placeholder="your message" required></textarea>
+        <button>Send</button>
+    </form>
+
+    <div class="company-info">
+        <div class="header">
+            <h4>SC Smile Services SRL</h4>
+            <p>Registered in EU, Romania</p>
+            <p>Bucharest, Aleea Zorelelor no 6</p>
+        </div>
+        <div class="subheading">
+            <p>Operating since December 2009</p>
+            <p>VAT - VIES RO26286942</p>
+        </div>
+    </div>
+</div>
+</div>
+</div><script>
+    function openModal(id) {
+        document.getElementsByTagName('body')[0].classList.add('has-modal');
+        document.getElementById(id).parentNode.parentNode.classList.add('open');
+    }
+    function closeModal() {
+        document.getElementsByTagName('body')[0].classList.remove('has-modal');
+        Array.from(document.getElementsByClassName('modal-container open'))
+            .map(modal=>modal.classList.remove('open'));
+    }
+</script>
+</body>
+
+</html>
