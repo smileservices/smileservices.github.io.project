@@ -4,13 +4,6 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/content" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/content/blog" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/output" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/pula/pelican-mockingbird" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/themes/brutalist" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/themes/clean-blog" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/themes/main-content" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/themes/pelican-mockingbird" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/venv/lib/python3.8/site-packages/pelican/themes/clean-blog" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/venv/lib/python3.8/site-packages/pelican/themes/pelican-mockingbird" vcs="Git" />
   </component>
 </project>

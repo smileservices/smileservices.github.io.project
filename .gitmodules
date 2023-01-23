@@ -4,3 +4,6 @@
 [submodule "content/blog"]
 	path = content/blog
 	url = https://github.com/smileservices/dev_blogpposts.git
+[submodule "uikit"]
+	path = output/uikit
+	url = https://github.com/smileservices/uikit.serve
